@@ -16,15 +16,15 @@ export class Dashboard extends Component {
     onCollectionUpdate = (querySnapshot) => {
         const movies = [];
         querySnapshot.forEach((doc) => {
-            const {title, director, year, rating, img} = doc.data();
+            const {Title, Director, Year, Rated, Poster} = doc.data();
             movies.push({
                 key: doc.id,
                 doc, // document snapshot
-                title,
-                director,
-                year,
-                rating,
-                img
+                Title,
+                Director,
+                Year,
+                Rated,
+                Poster
             });
         });
 
@@ -63,14 +63,14 @@ export class Dashboard extends Component {
                             {
                                 this.state.movies.map( movie =>
                                     <tr>
-                                        <td><img src={movie.img} alt="poster" height="222" width="150"/></td>
+                                        <td><img src={movie.Poster} alt="poster" height="222" width="150"/></td>
                                         <td>
                                             <Link to={`/details/${movie.key}`}>
-                                                {movie.title}
+                                                {movie.Title}
                                             </Link>
                                         </td>
-                                        <td>{movie.director}</td>
-                                        <td>{movie.year}</td>
+                                        <td>{movie.Director}</td>
+                                        <td>{movie.Year}</td>
                                     </tr>
                                 )
                             }

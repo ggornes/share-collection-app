@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
+import firebase from "../Firebase/firebase"
 
 export class Search extends Component {
 
     constructor(props) {
+
         super(props);
+
+        this.ref=firebase.firestore().collection('movies');
 
         this.state = {
             isFetching: false,
@@ -38,9 +42,19 @@ export class Search extends Component {
                     foundResults : true
                 });
                 console.log(result);
+                this.ref.add(result)
+                    .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                    .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+
+
             })
             .catch(e => {
                 console.log(e);
+                console.error("Error adding document: ", e);
                 this.setState({...this.state, isFetching: false, foundResults: false});
             });
     };
