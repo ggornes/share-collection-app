@@ -3,6 +3,8 @@ import * as ROUTES from '../Constants/routes';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navigation from "../Navigation";
 import Dashboard from "../Dashboard";
+import Search from "../Search"
+import Details from "../Details"
 import Landing from '../Landing/Landing';
 // import AddPage from '../Add/Add'
 // import BrowsePage from '../Dashboard/Browse';
@@ -24,6 +26,9 @@ export class App extends Component {
                     <Router>
                         <Navigation/>
                         <Route path={ROUTES.DASHBOARD} component={Dashboard} />
+                        <Route path="/details/:id" component={Details}/>
+                        <Route path={ROUTES.SEARCH} component={Search} />
+
                     </Router>
                 </header>
 

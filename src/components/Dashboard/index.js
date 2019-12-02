@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
+import {Link} from 'react-router-dom';
 
 export class Dashboard extends Component {
 
@@ -15,14 +16,15 @@ export class Dashboard extends Component {
     onCollectionUpdate = (querySnapshot) => {
         const movies = [];
         querySnapshot.forEach((doc) => {
-            const {title, director, year, rating} = doc.data();
+            const {title, director, year, rating, img} = doc.data();
             movies.push({
                 key: doc.id,
                 doc, // document snapshot
                 title,
                 director,
                 year,
-                rating
+                rating,
+                img
             });
         });
 
@@ -42,7 +44,7 @@ export class Dashboard extends Component {
                 <div className="card card-default">
 
                     <div className="card-heading">
-                        <h3 className="card-title">BOARD LIST</h3>
+                        <h3 className="card-title">Movies list</h3>
                     </div>
 
                     <div className="card-body">
@@ -51,22 +53,24 @@ export class Dashboard extends Component {
                         <table className="table table-striped">
                             <thead>
                             <tr>
+                                <th>Poster</th>
                                 <th>Title</th>
-                                <th>Description</th>
-                                <th>Author</th>
+                                <th>Director</th>
+                                <th>Year</th>
                             </tr>
                             </thead>
                             <tbody>
                             {
-                                this.state.boards.map( board =>
+                                this.state.movies.map( movie =>
                                     <tr>
+                                        <td><img src={movie.img} alt="poster" height="222" width="150"/></td>
                                         <td>
-                                            <Link to={`/show/${board.key}`}>
-                                                {board.title}
+                                            <Link to={`/details/${movie.key}`}>
+                                                {movie.title}
                                             </Link>
                                         </td>
-                                        <td>{board.description}</td>
-                                        <td>{board.author}</td>
+                                        <td>{movie.director}</td>
+                                        <td>{movie.year}</td>
                                     </tr>
                                 )
                             }
