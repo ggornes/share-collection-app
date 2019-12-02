@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
+import {Link} from "react-router-dom";
 
 export class Search extends Component {
 
@@ -28,6 +29,18 @@ export class Search extends Component {
         this.setState(state);
     };
 
+    handleAdd = () => {
+
+        this.ref.add(this.state.result)
+            .then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+
+    };
+
     onSubmit = (e) => {
         // ToDo: Validate fields
         // if field is empty, var = default;
@@ -41,14 +54,19 @@ export class Search extends Component {
                     isFetching: true,
                     foundResults : true
                 });
+
                 console.log(result);
-                this.ref.add(result)
-                    .then(function(docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                })
-                    .catch(function(error) {
-                    console.error("Error adding document: ", error);
-                });
+
+                // if (result.Response !== "False") {
+                //     this.ref.add(result)
+                //         .then(function(docRef) {
+                //             console.log("Document written with ID: ", docRef.id);
+                //         })
+                //         .catch(function(error) {
+                //             console.error("Error adding document: ", error);
+                //         });
+                // }
+
 
 
             })
@@ -77,7 +95,51 @@ export class Search extends Component {
                                 <div>
                                     Results
                                     <div>
-                                        {this.state.result.Title}
+
+                                        <div className="card card-default">
+
+                                            <div className="card-heading">
+                                                <h3 className="card-title">Movies list</h3>
+                                            </div>
+
+                                            <div className="card-body">
+                                                <h4><Link to="/details">Add Board</Link></h4>
+
+                                                <table className="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Poster</th>
+                                                        <th>Title</th>
+                                                        <th>Director</th>
+                                                        <th>Year</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                            <tr>
+                                                                <td><img src={this.state.result.Poster} alt="poster" height="222" width="150"/></td>
+                                                                <td>
+                                                                    {this.state.foundResults ?
+                                                                        (<Link to={`/details/`} moviedata={this.state.result}>
+                                                                            {this.state.result.Title}
+                                                                        </Link>)
+                                                                        :
+                                                                        (<>{this.state.result.Title}</>)
+                                                                    }
+                                                                </td>
+                                                                <td>{this.state.result.Director}</td>
+                                                                <td>{this.state.result.Year}</td>
+                                                            </tr>
+
+                                                    </tbody>
+                                                </table>
+                                                <div>
+                                                    <button onClick={this.handleAdd}>Add</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </div>
                             )

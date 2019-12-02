@@ -12,21 +12,27 @@ class Details extends Component {
     }
 
     componentDidMount() {
-        const ref=firebase.firestore().collection('movies').doc(this.props.match.params.id);
-        // QuerySnapShot.doc()
-        ref.get()
-            .then((doc) =>{
-                if (doc.exists) {
-                    this.setState({
-                        movie:doc.data(),
-                        key: doc.id,
-                        isLoading: false
-                    });
-                } else {
-                    console.log("No such document");
-                }
+        // const ref=firebase.firestore().collection('movies').doc(this.props.match.params.id);
+        const movies_collection=firebase.firestore().collection('movies');
+        const movie = movies_collection.doc(this.props.match.params.id);
+        if (movie) {
+            // QuerySnapShot.doc()
+            movie.get()
+                .then((doc) =>{
+                    if (doc.exists) {
+                        this.setState({
+                            movie:doc.data(),
+                            key: doc.id,
+                            isLoading: false
+                        });
+                    } else {
+                        console.log("No such document");
+                    }
 
-            })
+                })
+        }
+
+
     }
 
     delete(id) {
@@ -47,11 +53,11 @@ class Details extends Component {
                 <div className="card-body">
                     <dl>
                         <dt>Description:</dt>
-                        <dd>{this.state.movie.title}</dd>
+                        <dd>{this.state.movie.Title}</dd>
                         <dt>Author:</dt>
-                        <dd>{this.state.movie.director}</dd>
+                        <dd>{this.state.movie.Director}</dd>
                         <dt>Title:</dt>
-                        <dd>{this.state.movie.year}</dd>
+                        <dd>{this.state.movie.Year}</dd>
                     </dl>
                     <Link to={`/edit/${this.state.key}`} className="btn btn-success mr-2">
                         Edit
