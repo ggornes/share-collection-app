@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
 import {Link} from "react-router-dom";
+import Axios from "axios";
+import GoodReads from 'react-goodreads';
 
 export class Search extends Component {
 
@@ -24,7 +26,7 @@ export class Search extends Component {
                     title: ''
                 },
                 book: {
-                    API_url: 'https://www.goodreads.com/search/index.xml?key=pynfrGvRyf7GmO0RozFXA&q=',
+                    API_url: 'https://cors-anywhere.herokuapp.com/https://www.goodreads.com/search/index.xml?key=pynfrGvRyf7GmO0RozFXA&q=',
                     title: ''
                 }
             },
@@ -109,9 +111,10 @@ export class Search extends Component {
             });
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // fetch movies2
-        fetch('https://cors-anywhere.herokuapp.com/'+this.state.search_item.movie.API_url+this.state.search_item.movie.title)
+        fetch(this.state.search_item.movie.API_url+this.state.search_item.movie.title)
             .then(response => response.json())
             .then(result => {
                 this.setState({
@@ -133,34 +136,61 @@ export class Search extends Component {
                 this.setState({...this.state, isFetching: false, foundResults: false});
             });
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // fetch books
-        fetch(this.state.search_item.book.API_url+this.state.search_item.book.title)
-            .then(response => response.json())
-            .then(result => {
-                this.setState({
-                    search_result: {
-                        book: {
-                            result: result
-                        }
-                    },
-                    isFetching: true,
-                    foundResults : true
-                });
-
-                console.log(result);
-
+        Axios.get(this.state.search_item.book.API_url+this.state.search_item.book.title)
+            .then(res => {
+                this.parseXMLResponse(res.data);
             })
-            .catch(e => {
-                console.log(e);
-                console.error("Error adding document: ", e);
-                this.setState({...this.state, isFetching: false, foundResults: false});
+            .catch(error => {
+                this.setState({
+                    error: error.toString(),
+                    fetchingData: false
+                });
             });
-
-
-
-
-
     };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // parse string xml received from goodreads api
+    parseXMLResponse = response => {
+        const parser = new DOMParser();
+        const XMLResponse = parser.parseFromString(response, "application/xml");
+        const parseError = XMLResponse.getElementsByTagName("parsererror");
+
+        if (parseError.length) {
+            this.setState({
+                error: "There was an error fetching results.",
+                fetchingData: false
+            });
+        } else {
+            const XMLresults = new Array(...XMLResponse.getElementsByTagName("work"));
+            const searchResults = XMLresults.map(result => this.XMLToJson(result));
+            // this.setState({ fetchingData: false }, () => {
+            //     this.props.setResults(searchResults);
+            // });
+            console.log("searchResults: ", searchResults);
+        }
+    };
+
+
+    // Function to convert simple XML document into JSON.
+    // Loops through each child and saves it as key, value pair
+    // if there are sub-children, call the same function recursively on its children.
+    XMLToJson = XML => {
+        const allNodes = new Array(...XML.children);
+        const jsonResult = {};
+        allNodes.forEach(node => {
+            if (node.children.length) {
+                jsonResult[node.nodeName] = this.XMLToJson(node);
+            } else {
+                jsonResult[node.nodeName] = node.innerHTML;
+            }
+        });
+        return jsonResult;
+    };
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     render() {
         return(
