@@ -142,6 +142,27 @@ export class Search extends Component {
         Axios.get(this.state.search_item.book.API_url+this.state.search_item.book.title)
             .then(res => {
                 this.parseXMLResponse(res.data);
+                // const result = {
+                //     Poster: searchResults[0].best_book.image_url,
+                //     Title: searchResults[0].best_book.title,
+                //     Director: searchResults[0].best_book.author.name,
+                //     Year: searchResults[0].original_publication_year
+                //
+                // };
+
+                // this.setState({
+                //     search_result: {
+                //         book: {
+                //             result: result
+                //         }
+                //     },
+                //     isFetching: true,
+                //     foundResults : true
+                // });
+
+            })
+            .then(res2 => {
+                console.log(res2);
             })
             .catch(error => {
                 this.setState({
@@ -170,7 +191,14 @@ export class Search extends Component {
             // this.setState({ fetchingData: false }, () => {
             //     this.props.setResults(searchResults);
             // });
-            console.log("searchResults: ", searchResults);
+            // console.log("searchResults: ", searchResults);
+            // console.log(searchResults[0].best_book);
+            // console.log(searchResults[0].best_book.title);
+            // console.log(searchResults[0].best_book.author.name);
+            // console.log(searchResults[0].original_publication_year);
+            // console.log(searchResults[0].best_book.image_url);
+
+
         }
     };
 
