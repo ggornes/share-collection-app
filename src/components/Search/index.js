@@ -159,7 +159,12 @@ export class Search extends Component {
                             )
                             :
                             (<div>
-                                No results
+                                {
+                                    this.state.isFetching ?
+                                        (<p>No results</p>)
+                                    :('')
+
+                                }
                             </div>)
                     }
                     <h5>{this.state.result.title}</h5>

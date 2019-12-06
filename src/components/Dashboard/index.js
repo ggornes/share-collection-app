@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
 import {Link} from 'react-router-dom';
+import { Layout } from 'antd';
+
+// import './index.css';
+
+const { Header, Footer, Sider, Content } = Layout;
+
 
 export class Dashboard extends Component {
 
@@ -38,6 +44,7 @@ export class Dashboard extends Component {
 
     render() {
         return(
+
             <div>
                 <h1>Dashboard</h1>
 
@@ -63,7 +70,7 @@ export class Dashboard extends Component {
                             {
                                 this.state.movies.map( movie =>
                                     <tr>
-                                        <td><img src={movie.Poster} alt="poster" height="222" width="150"/></td>
+                                        <td><img src={movie.Poster} alt="poster" height="148" width="100"/></td>
                                         <td>
                                             <Link to={`/details/${movie.key}`}>
                                                 {movie.Title}
@@ -81,6 +88,11 @@ export class Dashboard extends Component {
                 </div>
 
             </div>
+
+
+
+
+
         )
     }
 
