@@ -16,7 +16,7 @@ export class Search extends Component {
             isFetching: false,
             foundResults: false,
             search_term: {
-                API_url: 'https://www.omdbapi.com/?apikey=156276c&t=',
+                API_url: 'https://www.omdbapi.com/?apikey=156276c&t=', // if s instead of t search returns array
                 title: ''
             },
             result: "",
@@ -66,6 +66,8 @@ export class Search extends Component {
                         isFetching: true,
                         foundResults: true
                     });
+
+                    console.log("Result: ", result);
                 } else {
                     this.setState({
                         foundResults: false

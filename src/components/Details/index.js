@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
 import {Link} from 'react-router-dom';
+import {Card} from "antd";
+const { Meta } = Card;
 
 class Details extends Component {
     constructor(props) {
@@ -46,22 +48,29 @@ class Details extends Component {
     }
 
     render(){
+        const movie = this.state.movie;
         return(
             <div>
                 <h1>details</h1>
 
                 <div className="card-body">
-                    <dl>
-                        <dt>Description:</dt>
-                        <dd>{this.state.movie.Title}</dd>
-                        <dt>Author:</dt>
-                        <dd>{this.state.movie.Director}</dd>
-                        <dt>Title:</dt>
-                        <dd>{this.state.movie.Year}</dd>
-                    </dl>
-                    <Link to={`/edit/${this.state.key}`} className="btn btn-success mr-2">
-                        Edit
-                    </Link>
+
+                    <div className="newerContainer">
+                        <Card
+                            hoverable
+                            style={{ width: 480 }}
+                            cover={<img alt="poster" src={movie.Poster} />}
+                        >
+                            <Meta title={movie.Title} description="" />
+                            <p>{movie.Director}</p>
+                        </Card>
+                        <Link to={`/edit/${this.state.key}`} className="btn btn-success mr-2">
+                            Edit
+                        </Link>
+
+
+                    </div>
+
                     <button
                         onClick={this.delete.bind(this, this.state.key)}
                         className="btn btn-danger">

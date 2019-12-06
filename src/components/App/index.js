@@ -41,7 +41,7 @@ export class App extends Component {
                         }}
                     >
                         <div className="logo" />
-                        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+                        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                             <Menu.Item key="1">
                                 <Icon type="home" />
                                 <span className="nav-text">Home</span>
