@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
 import {Link} from 'react-router-dom';
 import { Layout } from 'antd';
+import { Card } from 'antd';
+
+const { Meta } = Card;
 
 // import './index.css';
 
@@ -22,7 +25,7 @@ export class Dashboard extends Component {
     onCollectionUpdate = (querySnapshot) => {
         const movies = [];
         querySnapshot.forEach((doc) => {
-            const {Title, Director, Year, Rated, Poster} = doc.data();
+            const {Title, Director, Year, Rated, Poster, Ratings} = doc.data();
             movies.push({
                 key: doc.id,
                 doc, // document snapshot
@@ -30,7 +33,8 @@ export class Dashboard extends Component {
                 Director,
                 Year,
                 Rated,
-                Poster
+                Poster,
+                Ratings
             });
         });
 
@@ -54,36 +58,31 @@ export class Dashboard extends Component {
                         <h3 className="card-title">Movies list</h3>
                     </div>
 
-                    <div className="card-body">
-                        <h4><Link to="/create">Add Movie</Link></h4>
 
-                        <table className="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Poster</th>
-                                <th>Title</th>
-                                <th>Director</th>
-                                <th>Year</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                this.state.movies.map( movie =>
-                                    <tr>
-                                        <td><img src={movie.Poster} alt="poster" height="148" width="100"/></td>
-                                        <td>
-                                            <Link to={`/details/${movie.key}`}>
-                                                {movie.Title}
-                                            </Link>
-                                        </td>
-                                        <td>{movie.Director}</td>
-                                        <td>{movie.Year}</td>
-                                    </tr>
-                                )
-                            }
-                            </tbody>
-                        </table>
+
+                    <div className="newContainer">
+                        {this.state.movies.map(movie =>
+                            <>
+
+
+                                <div className="newerContainer">
+                                    <Link to={`/details/${movie.key}`}>
+                                        <Card
+                                            hoverable
+                                            style={{ width: 240 }}
+                                            cover={<img alt="example" src={movie.Poster} />}
+                                        >
+                                            <Meta title={movie.Title} description="" />
+                                            <p>{movie.Director}</p>
+                                            <p>{movie.Ratings[0].Value}</p>
+                                        </Card>
+                                    </Link>
+
+                                </div>
+                            </>
+                        )}
                     </div>
+
 
                 </div>
 
