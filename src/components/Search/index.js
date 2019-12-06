@@ -21,7 +21,6 @@ export class Search extends Component {
             },
             result: "",
 
-
         };
     }
 
@@ -34,11 +33,6 @@ export class Search extends Component {
         this.setState(state);
     };
 
-    change = (e) => {
-        const state = this.state;
-        state.search_type = e.target.value;
-        this.setState(state);
-    };
 
     handleAdd = () => {
 
@@ -78,21 +72,7 @@ export class Search extends Component {
                     })
                 }
 
-
-
                 console.log(result.Response);
-
-                // if (result.Response !== "False") {
-                //     this.ref.add(result)
-                //         .then(function(docRef) {
-                //             console.log("Document written with ID: ", docRef.id);
-                //         })
-                //         .catch(function(error) {
-                //             console.error("Error adding document: ", error);
-                //         });
-                // }
-
-
 
             })
             .catch(e => {
@@ -100,36 +80,6 @@ export class Search extends Component {
                 console.error("Error adding document: ", e);
                 this.setState({...this.state, isFetching: false, foundResults: false});
             });
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // fetch movies2
-        // if (this.state.search_type === "movies") {
-        //     fetch(this.state.search_item.movie.API_url+this.state.search_item.movie.title)
-        //         .then(response => response.json())
-        //         .then(result => {
-        //             this.setState({
-        //                 search_result: {
-        //                     movie: {
-        //                         result: result
-        //                     }
-        //                 },
-        //                 isFetching: true,
-        //                 foundResults : true
-        //             });
-        //
-        //             console.log(result);
-        //
-        //         })
-        //         .catch(e => {
-        //             console.log(e);
-        //             console.error("Error adding document: ", e);
-        //             this.setState({...this.state, isFetching: false, foundResults: false});
-        //         });
-        // }
-
-
 
 
 
@@ -204,15 +154,6 @@ export class Search extends Component {
                                         </div>
 
                                     </div>
-
-
-
-
-
-
-
-
-
 
                                 </div>
                             )
