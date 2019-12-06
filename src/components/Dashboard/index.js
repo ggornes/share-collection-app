@@ -48,7 +48,7 @@ export class Dashboard extends Component {
                     </div>
 
                     <div className="card-body">
-                        <h4><Link to="/create">Add Board</Link></h4>
+                        <h4><Link to="/create">Add Movie</Link></h4>
 
                         <table className="table table-striped">
                             <thead>
