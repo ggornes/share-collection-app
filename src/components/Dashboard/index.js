@@ -11,7 +11,7 @@ const { Meta } = Card;
 const { Header, Footer, Sider, Content } = Layout;
 
 
-export class Dashboard extends Component {
+class Dashboard extends Component {
 
     constructor(props){
         super(props); // get properties from Component

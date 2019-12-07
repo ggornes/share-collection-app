@@ -3,9 +3,10 @@ import * as ROUTES from '../Constants/routes';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import Navigation from "../Navigation";
 import Dashboard from "../Dashboard";
-import Search from "../Search"
-import Details from "../Details"
-import Landing from '../Landing/Landing';
+import Search from "../Search";
+import Details from "../Details";
+import Home from "../Home";
+import Landing from '../Home';
 // import AddPage from '../Add/Add'
 // import BrowsePage from '../Dashboard/Browse';
 // import DetailsPage2 from '../Details/Details2'
@@ -45,6 +46,7 @@ export class App extends Component {
                             <Menu.Item key="1">
                                 <Icon type="home" />
                                 <span className="nav-text">Home</span>
+                                <Link to={ROUTES.HOME}>Home</Link>
                             </Menu.Item>
                             <Menu.Item key="2">
                                 <Icon type="profile" />
@@ -70,7 +72,7 @@ export class App extends Component {
                         <Header style={{ background: '#0f0f0f', padding: 0 }} />
                         <Content style={{ margin: '24px 16px 0' }}>
                             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                                content
+                                <Route path={ROUTES.HOME} component={Home}/>
                                 <Route path={ROUTES.DASHBOARD} component={Dashboard} />
                                 <Route path="/details/:id" component={Details}/>
                                 <Route path={ROUTES.SEARCH} component={Search} />
