@@ -39,10 +39,14 @@ export class Search extends Component {
         this.ref.add(this.state.result)
             .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
+                alert("Movie added to Collection");
             })
             .catch(function(error) {
                 console.error("Error adding document: ", error);
+                alert("Error while adding movie to collection");
             });
+
+        this.setState({foundResults: false});
 
     };
 
@@ -94,7 +98,7 @@ export class Search extends Component {
             <div>
                 <div id="search-form">
                     <h3>Search movie</h3>
-                    <h4>{this.state.search_term.API_url+this.state.search_term.title}</h4>
+                    {/*<h4>{this.state.search_term.API_url+this.state.search_term.title}</h4>*/}
                     <h5>{this.state.result.title}</h5>
                     <form onSubmit={this.onSubmit}>
                         <input type="text" name="title" placeholder="movie" onChange={this.onChange}/>

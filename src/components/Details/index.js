@@ -53,7 +53,7 @@ class Details extends Component {
         firebase.firestore().collection('movies')
             .doc(id).delete().then(()=>{
             console.log("Document successfully deleted!");
-            this.props.history.push("/");
+            this.props.history.push("/dashboard");
         }).catch((error)=>{
             console.error("Error removing document: ", error);
         });
@@ -81,9 +81,6 @@ class Details extends Component {
                     )
                     :
                     <div className="itemContainer">
-
-
-                        <br/><br/>
 
                         <div className="film">
                             <div className="poster">

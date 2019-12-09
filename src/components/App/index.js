@@ -9,7 +9,6 @@ import Details from "../Details";
 import { Tooltip } from 'antd';
 import { Switch } from 'antd';
 
-
 import Home from "../Home";
 import Landing from '../Home';
 // import AddPage from '../Add/Add'
@@ -21,8 +20,10 @@ import Landing from '../Home';
 // import EditVehicle from "../EditVehicle/EditVehicle";
 
 import { Layout, Menu, Icon } from 'antd';
+import {Search2} from "../Search/moviesAndBooks";
 
 const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 export class App extends Component {
 
@@ -104,11 +105,21 @@ export class App extends Component {
                                 }
 
                             </Menu.Item>
+
+                            <SubMenu
+                                key="sub2"
+                                title={
+                                    <span>
+                                        <Icon type="folder-open" />
+                                        <span>Collections</span>
+                                    </span>
+                                }
+                            >
+                                <Menu.Item key="6">Movies</Menu.Item>
+                                <Menu.Item key="8">Books</Menu.Item>
+                            </SubMenu>
+
                             <Menu.Item key="3">
-                                <Icon type="folder-open" />
-                                <span className="nav-text">Movies</span>
-                            </Menu.Item>
-                            <Menu.Item key="4">
                                 <Icon type="search" />
                                 <span className="nav-text">Search</span>
                                 {this.state.showHelp ?
@@ -123,13 +134,31 @@ export class App extends Component {
                                     )
                                 }
                             </Menu.Item>
+
+
+                            {/*<Menu.Item key="4">*/}
+                            {/*    <Icon type="search" />*/}
+                            {/*    <span className="nav-text">Search</span>*/}
+                            {/*    {this.state.showHelp ?*/}
+                            {/*        (*/}
+                            {/*            <Tooltip title="Search movies" placement="right">*/}
+                            {/*                <Link to={ROUTES.SEARCH2}>Search2</Link>*/}
+                            {/*            </Tooltip>*/}
+                            {/*        )*/}
+                            {/*        :*/}
+                            {/*        (*/}
+                            {/*            <Link to={ROUTES.SEARCH2}>Search2</Link>*/}
+                            {/*        )*/}
+                            {/*    }*/}
+                            {/*</Menu.Item>*/}
                             <hr/>
                             <div>
 
                                 <Tooltip title="Toggle tooltips over Menu nav links" placement="bottom">
-                                <span>Show help</span>
+                                    <span>Show help       </span>
+                                    <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked onChange={this.onChange}/>
                                 </Tooltip>
-                                <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked onChange={this.onChange}/>
+
                             </div>
                         </Menu>
                     </Sider>
@@ -138,9 +167,13 @@ export class App extends Component {
                         <Content style={{ margin: '24px 16px 0' }}>
                             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
 
+
+                                <Route exact path={ROUTES.HOME} component={Home} />
                                 <Route path={ROUTES.DASHBOARD} component={Dashboard} />
                                 <Route path="/details/:id" component={Details}/>
                                 <Route path={ROUTES.SEARCH} component={Search} />
+
+                                <Route path={ROUTES.SEARCH2} component={Search2} />
 
                             </div>
 

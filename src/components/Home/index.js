@@ -5,7 +5,7 @@ const Home = () => {
     return(
         <div>
             <h1>Movies collection</h1>
-            <img src="/src/img/retro-movie-sharpie-drawings-2.jpg"/>
+            <img alt="movies" className="responsive" src="https://bitrebels.com/wp-content/uploads/2012/10/retro-movie-sharpie-drawings-1.jpg"/>
         </div>
     )
 };

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import Axios from "axios";
 import GoodReads from 'react-goodreads';
 
-export class Search extends Component {
+export class Search2 extends Component {
 
     constructor(props) {
 
@@ -387,4 +387,4 @@ export class Search extends Component {
 
 }
 
-export default Search;
+export default Search2;
