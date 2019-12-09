@@ -118,7 +118,6 @@ export class Search extends Component {
                                             </div>
 
                                             <div className="card-body">
-                                                <h4><Link to="/details">Add Movie</Link></h4>
 
                                                 <table className="table table-striped">
                                                     <thead>

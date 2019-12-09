@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
 import {Link} from 'react-router-dom';
-import { Layout } from 'antd';
+import {Layout, Popover} from 'antd';
 import { Card } from 'antd';
 
 const { Meta } = Card;
@@ -51,14 +51,11 @@ class Dashboard extends Component {
 
             <div>
                 <h1>Dashboard</h1>
-
+                <span className="nav-text">Home</span>
                 <div className="card card-default">
-
                     <div className="card-heading">
                         <h3 className="card-title">Movies list</h3>
                     </div>
-
-
 
                     <div className="newContainer">
                         {this.state.movies.map(movie =>

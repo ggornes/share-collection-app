@@ -1,0 +1,26 @@
+.responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+
+div .itemContainer {
+    border: solid blue;
+    overflow:auto;
+}
+
+div .poster {
+    float: left;
+    margin-right: 10px;
+}
+
+div .info {
+    padding-left: 15px;
+    padding-right: 15px;
+    border: solid red;
+    overflow:auto;
+}
+
+p .film-title {
+    font-size: 1.5em;
+}
