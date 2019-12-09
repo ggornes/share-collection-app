@@ -124,7 +124,7 @@ export class App extends Component {
                                 <span className="nav-text">Search</span>
                                 {this.state.showHelp ?
                                     (
-                                        <Tooltip title="Search movies" placement="right">
+                                        <Tooltip title="Search movies by title" placement="right">
                                             <Link to={ROUTES.SEARCH}>Search</Link>
                                         </Tooltip>
                                     )
@@ -152,18 +152,25 @@ export class App extends Component {
                             {/*    }*/}
                             {/*</Menu.Item>*/}
                             <hr/>
-                            <div>
 
+
+                            <br/>
+
+                            <div style={{ paddingLeft: 24, paddingTop: 10}}>
                                 <Tooltip title="Toggle tooltips over Menu nav links" placement="bottom">
-                                    <span>Show help       </span>
-                                    <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked onChange={this.onChange}/>
+                                <span > Show Help       </span>
+                                <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked onChange={this.onChange}/>
                                 </Tooltip>
+                            </div>
 
+                            <div style={{ paddingLeft: 24, paddingTop: 15}}>
+                                <span ><Icon type="setting"/> Theme       </span>
+                                <Switch checkedChildren="Light" unCheckedChildren="Dark" defaultChecked={false} onChange={this.onChange}/>
                             </div>
                         </Menu>
                     </Sider>
                     <Layout>
-                        <Header style={{ background: '#0f0f0f', padding: 0 }} />
+                        <Header style={{ background: '#001529', padding: 0 }} />
                         <Content style={{ margin: '24px 16px 0' }}>
                             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
 
@@ -178,7 +185,7 @@ export class App extends Component {
                             </div>
 
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                        <Footer style={{ textAlign: 'center', background: '#001529', color: 'rgba(255, 255, 255, 0.65)' }}>Ant Design ©2018 Created by Ant UED</Footer>
                     </Layout>
                 </Layout>
 
