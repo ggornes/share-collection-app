@@ -31,7 +31,8 @@ export class App extends Component {
         super(props);
         this.state = {
             showHelp: true,
-            showTooltip: false
+            showTooltip: false,
+            theme: 'dark'
         }
     }
 
@@ -46,6 +47,18 @@ export class App extends Component {
         } else {
             this.setState({
                 showHelp: true
+            })
+        }
+    };
+
+    setTheme = () => {
+        if(this.state.theme === 'dark') {
+            this.setState({
+                theme: 'light'
+            })
+        } else {
+            this.setState({
+                theme: 'dark'
             })
         }
     };
@@ -72,6 +85,7 @@ export class App extends Component {
 
                 <Layout>
                     <Sider
+                        theme={this.state.theme}
                         breakpoint="lg"
                         collapsedWidth="0"
                         onBreakpoint={broken => {
@@ -82,7 +96,7 @@ export class App extends Component {
                         }}
                     >
                         <div className="logo" />
-                        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                        <Menu theme={this.state.theme} mode="inline" defaultSelectedKeys={['1']}>
                             <Menu.Item key="1">
                                 <Icon type="home" />
                                 <span className="nav-text">Home</span>
@@ -156,6 +170,11 @@ export class App extends Component {
 
                             <br/>
 
+                            <div style={{ paddingLeft: 24, paddingTop: 15}}>
+                                <span ><Icon type="setting"/> Theme       </span>
+                                <Switch checkedChildren="Light" unCheckedChildren="Dark" defaultChecked={false} onChange={this.setTheme}/>
+                            </div>
+
                             <div style={{ paddingLeft: 24, paddingTop: 10}}>
                                 <Tooltip title="Toggle tooltips over Menu nav links" placement="bottom">
                                 <span > Show Help       </span>
@@ -163,14 +182,11 @@ export class App extends Component {
                                 </Tooltip>
                             </div>
 
-                            <div style={{ paddingLeft: 24, paddingTop: 15}}>
-                                <span ><Icon type="setting"/> Theme       </span>
-                                <Switch checkedChildren="Light" unCheckedChildren="Dark" defaultChecked={false} onChange={this.onChange}/>
-                            </div>
+
                         </Menu>
                     </Sider>
                     <Layout>
-                        <Header style={{ background: '#001529', padding: 0 }} />
+                        <Header style={{ background: this.state.theme === "dark" ? '#001529' : '#fff', padding: 0 }} />
                         <Content style={{ margin: '24px 16px 0' }}>
                             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
 
@@ -185,7 +201,10 @@ export class App extends Component {
                             </div>
 
                         </Content>
-                        <Footer style={{ textAlign: 'center', background: '#001529', color: 'rgba(255, 255, 255, 0.65)' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                        <Footer style={{ background: this.state.theme === "dark" ? '#001529' : '#fff', color: this.state.theme === "dark" ? 'rgba(255, 255, 255, 0.65)' : 'rgba(0, 0, 0, 0.85)', textAlign: 'center',  }}>
+                            <p>Ant Design ©2018 Created by Ant UED</p>
+
+                        </Footer>
                     </Layout>
                 </Layout>
 

@@ -70,7 +70,6 @@ class Details extends Component {
         // );
         return(
             <div>
-                <h1>details</h1>
 
                 {this.state.isLoading ?
                     (
