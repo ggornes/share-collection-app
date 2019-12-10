@@ -3,6 +3,7 @@ import firebase from "../Firebase/firebase"
 import {Link} from "react-router-dom";
 import Axios from "axios";
 import GoodReads from 'react-goodreads';
+import { Form, Icon, Input, Button } from 'antd';
 
 export class Search extends Component {
 
@@ -100,10 +101,23 @@ export class Search extends Component {
                     <h3>Search movie</h3>
                     {/*<h4>{this.state.search_term.API_url+this.state.search_term.title}</h4>*/}
                     <h5>{this.state.result.title}</h5>
-                    <form onSubmit={this.onSubmit}>
-                        <input type="text" name="title" placeholder="movie" onChange={this.onChange}/>
-                        <button type="submit" name="Search">Search</button>
-                    </form>
+
+
+                        <Form onSubmit={this.onSubmit} >
+                            <Form.Item>
+                                <Input
+                                    prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="Movie Title"
+                                    name="title"
+                                    onChange={this.onChange}
+                                />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button htmlType="submit" name="search" icon="search" type="primary">Search</Button>
+                            </Form.Item>
+
+                        </Form>
+
                 </div>
 
                 <div id="results">
@@ -152,7 +166,11 @@ export class Search extends Component {
                                                     </tbody>
                                                 </table>
                                                 <div>
-                                                    <button onClick={this.handleAdd}>Add</button>
+                                                    <Form>
+                                                        <Form.Item>
+                                                            <Button icon="plus-circle" type="primary" onClick={this.handleAdd}>Add</Button>
+                                                        </Form.Item>
+                                                    </Form>
                                                 </div>
                                             </div>
 

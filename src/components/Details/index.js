@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import firebase from "../Firebase/firebase"
 import {Link} from 'react-router-dom';
-import {Card} from "antd";
+import {Button, Card, Form} from "antd";
 import { Row, Col } from 'antd';
 import './index.css';
 
@@ -120,14 +120,15 @@ class Details extends Component {
                         </div>
 
                         <Link to={`/edit/${this.state.key}`} className="btn btn-success mr-2">
-                            Edit
+                            <Button icon="edit" type="primary" >Edit</Button>
                         </Link>
 
-                        <button
-                            onClick={this.delete.bind(this, this.state.key)}
-                            className="btn btn-danger">
-                            Delete
-                        </button>
+
+                        <Form>
+                            <Form.Item>
+                                <Button icon="minus-circle" type="danger" onClick={this.delete.bind(this, this.state.key)}>Delete</Button>
+                            </Form.Item>
+                        </Form>
 
 
                     </div>

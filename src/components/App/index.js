@@ -5,6 +5,7 @@ import Navigation from "../Navigation";
 import Dashboard from "../Dashboard";
 import Search from "../Search";
 import Details from "../Details";
+import Edit from "../Edit";
 
 import { Tooltip } from 'antd';
 import { Switch } from 'antd';
@@ -177,7 +178,7 @@ export class App extends Component {
 
                             <div style={{ paddingLeft: 24, paddingTop: 10}}>
                                 <Tooltip title="Toggle tooltips over Menu nav links" placement="bottom">
-                                <span > Show Help       </span>
+                                <span ><Icon type="question-circle"/> Show Help       </span>
                                 <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked onChange={this.onChange}/>
                                 </Tooltip>
                             </div>
@@ -187,13 +188,19 @@ export class App extends Component {
                     </Sider>
                     <Layout>
                         <Header style={{ background: this.state.theme === "dark" ? '#001529' : '#fff', padding: 0 }} />
-                        <Content style={{ margin: '24px 16px 0' }}>
-                            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                        <Content style={{ margin: '24px 16px 0'}}>
+                            <div style={{
+                                padding: 24,
+                                background: this.state.theme === "dark" ? 'rgba(0, 21, 41, 0.9)' : 'rgba(24, 144, 255, 0.3)',
+                                color: this.state.theme === "dark" ? 'rgba(255, 255, 255, 0.65)' : 'rgba(0, 0, 0, 0.65)',
+                                minHeight: 360
+                            }}>
 
 
                                 <Route exact path={ROUTES.HOME} component={Home} />
                                 <Route path={ROUTES.DASHBOARD} component={Dashboard} />
                                 <Route path="/details/:id" component={Details}/>
+                                <Route path="/edit/:id" component={Edit}/>
                                 <Route path={ROUTES.SEARCH} component={Search} />
 
                                 <Route path={ROUTES.SEARCH2} component={Search2} />
