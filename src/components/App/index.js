@@ -179,7 +179,7 @@ export class App extends Component {
                             <div style={{ paddingLeft: 24, paddingTop: 10}}>
                                 <Tooltip title="Toggle tooltips over Menu nav links" placement="bottom">
                                 <span ><Icon type="question-circle"/> Show Help       </span>
-                                <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked onChange={this.onChange}/>
+                                <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked={false} onChange={this.onChange}/>
                                 </Tooltip>
                             </div>
 
