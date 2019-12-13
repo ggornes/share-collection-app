@@ -133,7 +133,7 @@ class Dashboard extends Component {
 
                         <div className="newContainer">
                             {this.state.movies.map(movie =>
-                                <div className="responsive">
+                                <div className="responsive" key={movie.key}>
 
 
                                     <div className="newerContainer">

@@ -17,6 +17,9 @@ const star = '<svg class="imdb-star" xmlns="http://www.w3.org/2000/svg" fill="#0
 class Details extends Component {
     constructor(props) {
         super(props);
+
+        this.ref=firebase.firestore().collection('movies');
+
         this.state = {
             movie:{},
             key:'',
@@ -26,6 +29,17 @@ class Details extends Component {
 
     componentDidMount() {
         // const ref=firebase.firestore().collection('movies').doc(this.props.match.params.id);
+
+
+        // get the saved result object from Search.fetch() from local storage
+
+
+        // const movieAPI = this.props.match.params.id;
+        // console.log("Testing: this.props.match.params: ", movieAPI);
+        const movieAPI = JSON.parse(localStorage.getItem('theMovie'));
+        console.log("Testing: this.props.match.params: ", movieAPI);
+
+
         const movies_collection=firebase.firestore().collection('movies');
         const movie = movies_collection.doc(this.props.match.params.id);
         if (movie) {
@@ -40,6 +54,12 @@ class Details extends Component {
                         });
 
                     } else {
+                        this.setState({
+                            movie: movieAPI,
+                            // key: doc.id,
+                            isSearchObject: true,
+                            isLoading: false
+                        });
                         console.log("No such document");
                     }
 
@@ -48,6 +68,23 @@ class Details extends Component {
 
 
     }
+
+    handleAdd = () => {
+        console.log("movie from local storage: ", this.state.movie);
+
+        this.ref.add(this.state.movie)
+            .then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+                alert("Movie added to Collection");
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+                alert("Error while adding movie to collection");
+            });
+
+        this.setState({foundResults: false});
+
+    };
 
     delete(id) {
         firebase.firestore().collection('movies')
@@ -119,16 +156,37 @@ class Details extends Component {
 
                         </div>
 
-                        <Link to={`/edit/${this.state.key}`} className="btn btn-success mr-2">
-                            <Button icon="edit" type="primary" >Edit</Button>
-                        </Link>
+
+                        {this.state.isSearchObject ?
+                            (
+                                <Form>
+                                    <Form.Item>
+                                        <Button icon="plus-circle" type="primary"
+                                                onClick={this.handleAdd}
+                                                >Add</Button>
+                                    </Form.Item>
+                                </Form>
+
+                            )
+                            :
+                            (
+                                <div>
+                                    <Link to={`/edit/${this.state.key}`} className="btn btn-success mr-2">
+                                        <Button icon="edit" type="primary">Edit</Button>
+                                    </Link>
 
 
-                        <Form>
-                            <Form.Item>
-                                <Button icon="minus-circle" type="danger" onClick={this.delete.bind(this, this.state.key)}>Delete</Button>
-                            </Form.Item>
-                        </Form>
+                                    <Form>
+                                        <Form.Item>
+                                            <Button icon="minus-circle" type="danger"
+                                                    onClick={this.delete.bind(this, this.state.key)}>Delete</Button>
+                                        </Form.Item>
+                                    </Form>
+                                </div>
+                            )
+                        }
+
+
 
 
                     </div>

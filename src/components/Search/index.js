@@ -14,7 +14,7 @@ export class Search extends Component {
         this.ref=firebase.firestore().collection('movies');
 
         this.state = {
-            isFetching: false,
+            isFetching: true,
             foundResults: false,
             search_term: {
                 API_url: 'https://www.omdbapi.com/?apikey=156276c&t=', // if s instead of t search returns array
@@ -72,6 +72,10 @@ export class Search extends Component {
                         foundResults: true
                     });
 
+                    // save the result object from Search.fetch() into local storage to render into Details component
+                    localStorage.setItem('theMovie', JSON.stringify(result));
+
+
                     console.log("Result: ", result);
                 } else {
                     this.setState({
@@ -80,6 +84,10 @@ export class Search extends Component {
                 }
 
                 console.log(result.Response);
+
+                // const theMovie = localStorage.getItem('theMovie');
+                // console.log("Local storage The movie:", JSON.parse(theMovie));
+
 
             })
             .catch(e => {
@@ -151,13 +159,11 @@ export class Search extends Component {
                                                     <tr>
                                                         <td><img src={this.state.result.Poster} alt="poster" height="222" width="150"/></td>
                                                         <td>
-                                                            {this.state.foundResults ?
-                                                                (<Link to={`/details/`} moviedata={this.state.result}>
+
+                                                                <Link to={`/details/${this.state.result.Title}`}>
                                                                     {this.state.result.Title}
-                                                                </Link>)
-                                                                :
-                                                                (<>{this.state.result.Title}</>)
-                                                            }
+                                                                </Link>
+
                                                         </td>
                                                         <td>{this.state.result.Director}</td>
                                                         <td>{this.state.result.Year}</td>
