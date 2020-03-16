@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
-import './index.css'
+
 
 
 import { Player } from 'video-react';
 //import "node_modules/video-react/dist/video-react.css";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class Home extends Component {
+class MoviePlayer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            playerSource: 'http://localhost:8000/REZOLUTION-PROMO-MIX.mp3',
-            inputVideoUrl: 'http://localhost:8000/REZOLUTION-PROMO-MIX.mp3'
+            playerSource: 'https://www.w3schools.com/html/mov_bbb.mp4',
+            inputVideoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4'
         };
 
         this.handleValueChange = this.handleValueChange.bind(this);
@@ -42,14 +42,9 @@ class Home extends Component {
     render() {
         return(
             <div>
-                <h1>My collection App</h1>
-                <p>Create your own collection</p>
-                <p>Search movies using the Open Movie Data Base API</p>
-                <p>Add movies to your collections</p>
-                <small>Books, Comics and Games collection coming soon...</small>
-                <br/>
+                <h1>Movie of the week</h1>
 
-                {/* <div>
+                <div id="moviePlayer">
                     <Player
                         ref={player => {
                             this.player = player;
@@ -57,6 +52,13 @@ class Home extends Component {
                         videoId="video-1"
                     >
                         <source src={this.state.playerSource} />
+                        {/* <track
+                            kind="captions"
+                            src="http://host:port/sub.vtt"
+                            srcLang="en"
+                            label="English"
+                            default
+                        /> */}
                     </Player>
                     <div className="docs-example">
                         <Form>
@@ -76,10 +78,7 @@ class Home extends Component {
                             </FormGroup>
                         </Form>
                     </div>
-                </div> */}
-
-                <br/>
-                <img alt="movies" className="responsive" src="https://bitrebels.com/wp-content/uploads/2012/10/retro-movie-sharpie-drawings-1.jpg"/>
+                </div>
             </div>
         )
     }
@@ -87,4 +86,4 @@ class Home extends Component {
 
 }
 
-export default Home;
+export default MoviePlayer;

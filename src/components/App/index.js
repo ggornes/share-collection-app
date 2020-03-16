@@ -22,6 +22,7 @@ import Landing from '../Home';
 
 import { Layout, Menu, Icon } from 'antd';
 import {Search2} from "../Search/moviesAndBooks";
+import MoviePlayer from "../MoviePlayer";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -151,21 +152,26 @@ export class App extends Component {
                             </Menu.Item>
 
 
-                            {/*<Menu.Item key="4">*/}
-                            {/*    <Icon type="search" />*/}
-                            {/*    <span className="nav-text">Search</span>*/}
-                            {/*    {this.state.showHelp ?*/}
-                            {/*        (*/}
-                            {/*            <Tooltip title="Search movies" placement="right">*/}
-                            {/*                <Link to={ROUTES.SEARCH2}>Search2</Link>*/}
-                            {/*            </Tooltip>*/}
-                            {/*        )*/}
-                            {/*        :*/}
-                            {/*        (*/}
-                            {/*            <Link to={ROUTES.SEARCH2}>Search2</Link>*/}
-                            {/*        )*/}
-                            {/*    }*/}
-                            {/*</Menu.Item>*/}
+                            <Menu.Item key="4">
+                               <Icon type="search" />
+                               <span className="nav-text">Search 2</span>
+                               {this.state.showHelp ?
+                                   (
+                                       <Tooltip title="Search movies" placement="right">
+                                           <Link to={ROUTES.SEARCH2}>Search2</Link>
+                                       </Tooltip>
+                                   )
+                                   :
+                                   (
+                                       <Link to={ROUTES.SEARCH2}>Search2</Link>
+                                   )
+                               }
+                            </Menu.Item>
+
+                            <Menu.Item key="5">
+                                <span className="nav-text">Movie Player</span>
+                                <Link to={ROUTES.MOVIEPLAYER}>MoviePlayer</Link>
+                            </Menu.Item>
                             <hr/>
 
 
@@ -204,6 +210,7 @@ export class App extends Component {
                                 <Route path={ROUTES.SEARCH} component={Search} />
 
                                 <Route path={ROUTES.SEARCH2} component={Search2} />
+                                <Route path="/moviePlayer/" component={MoviePlayer}/>
 
                             </div>
 
